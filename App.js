@@ -4,15 +4,18 @@ import {
 } from 'react-native';
 
 import Home from './src/screens/containers/Home'
+import Header from './src/sections/components/Header';
+import SuggestionList from './src/videos/containers/SuggestionList';
 
 class App extends Component {
   render(){
     return(
       <Home>
-        <Text>Header</Text>
+        <Header/>
         <Text>Buscador</Text>
         <Text>Categorias</Text>
         <Text>Sugerencias</Text>
+        <SuggestionList/>
       </Home>
     )
 
