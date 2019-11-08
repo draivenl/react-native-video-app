@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { View, Text, FlatList } from "react-native";
-
+import Layout from "../components/SuggestionListLayout";
 
 class SuggestionList extends Component {
     render(){
@@ -22,12 +22,12 @@ class SuggestionList extends Component {
             }
 
         ]
-        return <View>
-                <Text>SuggestionList</Text>
-                <FlatList data={list} renderItem={({item}) => {
-                    return <Text>{item.name} {item.lastName}</Text>
-                }}/>
-                </View>
+        return (<Layout title="Recomendados...">
+                    <FlatList 
+                        data={list} 
+                        renderItem={ ({item}) => <Text>{item.name} {item.lastName}</Text> }
+                    />
+                </Layout>)
     }
 }
 

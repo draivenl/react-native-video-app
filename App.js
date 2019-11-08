@@ -14,7 +14,6 @@ class App extends Component {
         <Header/>
         <Text>Buscador</Text>
         <Text>Categorias</Text>
-        <Text>Sugerencias</Text>
         <SuggestionList/>
       </Home>
     )
