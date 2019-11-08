@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 const VerticalSeparator = (props) => {
     return (
@@ -9,7 +9,6 @@ const VerticalSeparator = (props) => {
                     borderTopColor:(props.color) ? (props.color) : '#eaeaea'
                 }
             ]}>
-            <Text>VerticalSeparator</Text>
         </View>
     )
 };

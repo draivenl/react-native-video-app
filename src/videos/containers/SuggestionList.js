@@ -3,10 +3,16 @@ import { View, Text, FlatList } from "react-native";
 import Layout from "../components/SuggestionListLayout";
 import Empty from "../components/empty";
 import VerticalSeparator from "../components/vertical-separator";
+import Suggestion from "../components/suggestion";
 
 class SuggestionList extends Component {
     renderEmpty = () => {
         return <Empty text='No hay componentes en la lista'/>
+    }
+    renderItem = (item) => {
+        return (
+            <Suggestion {...item}/>
+        )
     }
     itemSeparator = () => {
         return <VerticalSeparator text='No hay componentes en la lista'/>
@@ -34,7 +40,7 @@ class SuggestionList extends Component {
                     <FlatList 
                         ListEmptyComponent={()=>this.renderEmpty()}
                         data={list} 
-                        renderItem={ ({item}) => <Text>{item.title}</Text> }
+                        renderItem={({item})=>this.renderItem(item)}
                         ItemSeparatorComponent={()=>this.itemSeparator()}
                     />
                 </Layout>)
