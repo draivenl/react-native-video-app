@@ -1,8 +1,11 @@
 import React, {Component} from "react";
-import { View, Text, FlatList, Layout } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import Empty from "../components/empty";
 import VerticalSeparator from "../components/vertical-separator";
-import Suggestion from "../components/suggestion";
+import Category from "../components/category";
+import Layout from "../components/CategoryListLayout";
+import HorizontalSeparator from "../../sections/components/horizontal-separator";
+
 
 class CategoryList extends Component {
     keyExtractor = item => item.id.toString()
@@ -12,23 +15,24 @@ class CategoryList extends Component {
     }
     renderItem = (item) => {
         return (
-            <Suggestion {...item}/>
+            <Category {...item}/>
         )
     }
     itemSeparator = () => {
-        return <VerticalSeparator text='No hay componentes en la lista'/>
+        return <HorizontalSeparator text='No hay componentes en la lista'/>
     }
     render(){
         return (
-        
-            <FlatList 
-                horizontal
-                keyExtractor={this.keyExtractor}
-                ListEmptyComponent={()=>this.renderEmpty()}
-                data={this.props.list} 
-                renderItem={({item})=>this.renderItem(item)}
-                ItemSeparatorComponent={()=>this.itemSeparator()}
-            />
+            <Layout title="Categorías....">
+                <FlatList 
+                    horizontal
+                    keyExtractor={this.keyExtractor}
+                    ListEmptyComponent={()=>this.renderEmpty()}
+                    data={this.props.list} 
+                    renderItem={({item})=>this.renderItem(item)}
+                    ItemSeparatorComponent={()=>this.itemSeparator()}
+                />
+            </Layout>
         )
     }
 }
