@@ -6,19 +6,24 @@ import {
 import Home from './src/screens/containers/Home'
 import Header from './src/sections/components/Header';
 import SuggestionList from './src/videos/containers/SuggestionList';
+import CategoryList from './src/videos/containers/CategoryList';
 import API from "./utils/api";
 
 class App extends Component {
   state = {
-    suggestionList:[]
+    suggestionList:[],
+    categoryList: []
   }
 
 
   async componentDidMount(){
     const movies = await API.getSuggestions(2)
+    const categories = await API.getMovies()
     console.log(movies);
+    console.log(categories);
     this.setState({
-      suggestionList: movies
+      suggestionList: movies,
+      categoryList: categories
     })
     
   }
@@ -28,6 +33,7 @@ class App extends Component {
         <Header/>
         <Text>Buscador</Text>
         <Text>Categorias</Text>
+        <CategoryList list={this.state.categoryList}/>
         <SuggestionList list={this.state.suggestionList}/>
       </Home>
     )

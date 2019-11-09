@@ -19,7 +19,11 @@ const styles = StyleSheet.create(
             flex: 1
         },
         title: {
-            color: '#4c4c4c'
+            color: '#4c4c4c',
+            fontSize: 20,
+            marginBottom: 10,
+            fontWeight: 'bold',
+            marginLeft: 8,
         }
     }
 )
