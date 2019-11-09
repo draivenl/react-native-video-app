@@ -6,6 +6,8 @@ import VerticalSeparator from "../components/vertical-separator";
 import Suggestion from "../components/suggestion";
 
 class SuggestionList extends Component {
+    keyExtractor = item => item.id.toString()
+    
     renderEmpty = () => {
         return <Empty text='No hay componentes en la lista'/>
     }
@@ -18,28 +20,11 @@ class SuggestionList extends Component {
         return <VerticalSeparator text='No hay componentes en la lista'/>
     }
     render(){
-        const list = [
-            {   
-                key: '1',
-                title: 'Avangers',
-                
-            },
-            {   
-                key: '2',
-                title: 'Super Man',
-                
-            },
-            {   
-                key: '3',
-                title: 'Batman',
-                
-            }
-
-        ]
         return (<Layout title="Recomendados...">
                     <FlatList 
+                        keyExtractor={this.keyExtractor}
                         ListEmptyComponent={()=>this.renderEmpty()}
-                        data={list} 
+                        data={this.props.list} 
                         renderItem={({item})=>this.renderItem(item)}
                         ItemSeparatorComponent={()=>this.itemSeparator()}
                     />
