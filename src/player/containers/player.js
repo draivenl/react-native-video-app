@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 import Video from 'react-native-video'
 import Layout from "../components/layout";
 
 
 
 class Player extends Component {
+    state = {
+        loading: true
+    }
+    onLoad = () => {
+        this.setState({
+            loading: false
+        })
+    }
     render(){
         return(
             <Layout
+                loading={this.state.loading}
                 video={
                     <Video
                         source={
@@ -16,7 +25,11 @@ class Player extends Component {
                         }
                         style={styles.video}
                         resizeMode="contain"
+                        onLoad={this.onLoad}
                     />
+                }
+                loader={
+                    <ActivityIndicator color="red"/>
                 }
             />
         )
