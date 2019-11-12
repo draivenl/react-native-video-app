@@ -12,6 +12,7 @@ const Layout = (props) => {
                 
 
             </View>
+            {props.controls}
         </View>
     )
 }
