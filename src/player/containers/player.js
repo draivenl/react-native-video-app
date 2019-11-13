@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, ActivityIndicator, Text } from "react-native";
+import { 
+    StyleSheet, 
+    ActivityIndicator, 
+    Text, 
+    TouchableHighlight 
+} from "react-native";
 import Video from 'react-native-video'
 import Layout from "../components/layout";
 import ControlLayout from "../components/control-layout";
@@ -10,16 +15,33 @@ import PlayPause from "../components/play-pause";
 class Player extends Component {
     state = {
         loading: true,
-        paused: false
+        paused: false,
+        currentTime: 0,
+        timeLeft: 0,
+        duration: 0,
+        fullscreen: false
     }
-    onLoad = () => {
+    onLoad = (data) => {
         this.setState({
-            loading: false
+            loading: false,
+            duration: data.duration,
+            timeLeft: data.duration
+        })
+    }
+    onProgress = (data) =>{
+        this.setState({
+            currentTime: Math.floor(data.currentTime),
+            timeLeft: Math.floor(this.state.duration - data.currentTime)
         })
     }
     playPause = () => {
         this.setState({
             paused: !this.state.paused
+        })
+    }
+    onPressFull = () => {
+        this.setState({
+            fullscreen: !this.state.fullscreen
         })
     }
     render(){
@@ -35,6 +57,8 @@ class Player extends Component {
                         resizeMode="contain"
                         onLoad={this.onLoad}
                         paused={this.state.paused}
+                        onProgress={this.onProgress}
+                        fullscreen={this.state.fullscreen}
                     />
                 }
                 loader={
@@ -46,9 +70,9 @@ class Player extends Component {
                             onPress={this.playPause}
                             paused={this.state.paused}
                         />
-                        <Text>Progress bar |</Text>
-                        <Text>Time left |</Text>
-                        <Text>Fullscreen |</Text>
+                        <Text>Progress bar {this.state.currentTime} |</Text>
+                        <Text>Time left  {this.state.timeLeft}|</Text>
+                        <TouchableHighlight onPress={()=>this.onPressFull()} ><Text>Full Screen</Text></TouchableHighlight>
                     </ControlLayout>
                 }
             />
