@@ -21,8 +21,8 @@ class App extends Component {
   async componentDidMount(){
     const movies = await API.getSuggestions(2)
     const categories = await API.getMovies()
-    console.log(movies);
-    console.log(categories);
+    // console.log(movies);
+    // console.log(categories);
     this.setState({
       suggestionList: movies,
       categoryList: categories
