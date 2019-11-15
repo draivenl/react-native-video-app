@@ -15,6 +15,7 @@ import CategoryList from './src/videos/containers/CategoryList';
 import API from "./utils/api";
 
 import Player from './src/player/containers/player';
+import Loading from './src/sections/components/loading';
 
 class App extends Component {
 
@@ -41,7 +42,7 @@ class App extends Component {
         store={store}
       >
         <PersistGate
-          loading={<Text>Cargando...</Text>}
+          loading={<Loading/>}
           persistor={persistor}
         >
           <Home>
