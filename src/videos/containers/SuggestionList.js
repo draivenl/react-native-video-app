@@ -18,9 +18,21 @@ class SuggestionList extends Component {
     renderEmpty = () => {
         return <Empty text='No hay componentes en la lista'/>
     }
+    viewMovie = item => {
+        this.props.dispatch({
+            type: 'SET_SELECTED_MOVIE',
+            payload: {
+                movie: item
+            }
+
+        })
+    }
     renderItem = (item) => {
         return (
-            <Suggestion {...item}/>
+            <Suggestion 
+                {...item}
+                onPress={() => this.viewMovie(item)}    
+            />
         )
     }
     itemSeparator = () => {

@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Text } from "react-native";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { connect } from "react-redux";
+
 
 import API from "../utils/api";
 import Home from "./screens/containers/Home";
-import Loading from "./sections/components/loading";
 import Header from "./sections/components/Header";
-import Player from "./player/containers/player";
 import SuggestionList from './videos/containers/SuggestionList';
 import CategoryList from './videos/containers/CategoryList';
 import {store, persistor} from '../store'
+import Movie from "./screens/containers/movie";
 
 
 class AppLayout extends Component {
@@ -33,28 +32,26 @@ class AppLayout extends Component {
     }
 
     render(){
+        if (this.props.selectedMovie) {
+            return <Movie/>
+        }
         return(
-                <Provider
-                    store={store}
-                >
-                    <PersistGate
-                    loading={<Loading/>}
-                    persistor={persistor}
-                    >
-                    <Home>
-                        <Header/>
-                        <Player></Player>
-                        
-                        <Text>Buscador</Text>
-                        <CategoryList/>
-                        <SuggestionList/>
-                    </Home>
-
-                    </PersistGate>
-                </Provider>    
+            <Home>
+                <Header/>
+                <Movie/>
+                <Text>Buscador</Text>
+                <CategoryList/>
+                <SuggestionList/>
+            </Home>
         )
     }
 
 }
 
-export default AppLayout
+const mapStateToProps = state => {
+    return {
+        selectedMovie: state.selectedMovie,
+    }
+}
+
+export default connect( mapStateToProps )( AppLayout )
