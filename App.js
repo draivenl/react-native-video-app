@@ -3,6 +3,10 @@ import {
   Text
 } from 'react-native';
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react'
+
+import {store, persistor} from './store'
+
 
 import Home from './src/screens/containers/Home'
 import Header from './src/sections/components/Header';
@@ -11,14 +15,8 @@ import CategoryList from './src/videos/containers/CategoryList';
 import API from "./utils/api";
 
 import Player from './src/player/containers/player';
-import store from './store'
 
 class App extends Component {
-  // state = {
-  //   suggestionList:[],
-  //   categoryList: []
-  // }
-
 
   async componentDidMount(){
     const categoryList = await API.getMovies()
@@ -42,14 +40,20 @@ class App extends Component {
       <Provider
         store={store}
       >
-        <Home>
-          <Header/>
-          <Player></Player>
-          
-          <Text>Buscador</Text>
-          <CategoryList/>
-          <SuggestionList/>
-        </Home>
+        <PersistGate
+          loading={<Text>Cargando...</Text>}
+          persistor={persistor}
+        >
+          <Home>
+            <Header/>
+            <Player></Player>
+            
+            <Text>Buscador</Text>
+            <CategoryList/>
+            <SuggestionList/>
+          </Home>
+
+        </PersistGate>
       </Provider>
     )
 
