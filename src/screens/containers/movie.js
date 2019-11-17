@@ -5,6 +5,7 @@ import MovieLayout from "../components/movie-layout";
 import Player from "../../player/containers/player";
 import Header from "../../sections/components/Header";
 import Close from "../../sections/components/close";
+import Details from "../../videos/components/details";
 
 
 
@@ -27,10 +28,17 @@ class Movie extends Component {
                     ></Close>
                 </Header>
                 <Player/>
+                <Details {...this.props.movie}/>
             </MovieLayout>
         )
-    }
+    }   
 
 }
 
-export default connect(null)( Movie )
+const mapStateToProps = (state) => {
+    return {
+        movie: state.selectedMovie
+    }
+}
+
+export default connect(mapStateToProps)( Movie )
