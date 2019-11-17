@@ -38,8 +38,8 @@ class AppLayout extends Component {
         return(
             <Home>
                 <Header/>
-                <Movie/>
                 <Text>Buscador</Text>
+                <Movie/>
                 <CategoryList/>
                 <SuggestionList/>
             </Home>
